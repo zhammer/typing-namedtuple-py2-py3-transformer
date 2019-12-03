@@ -8,7 +8,7 @@ import argparse
 import libcst as cst
 from libcst import CSTVisitorT
 
-from tornado_async_transformer import TornadoAsyncTransformer, TransformError
+from typing_namedtuple_transformer import TypingNamedTupleTransformer, TransformError
 
 
 def transform_file(visitor: CSTVisitorT, filename: str) -> None:
@@ -78,7 +78,7 @@ def main() -> None:
         python_files += collect_files(base)
 
     for python_file in python_files:
-        transform_file(TornadoAsyncTransformer(), python_file)
+        transform_file(TypingNamedTupleTransformer(), python_file)
 
 
 if __name__ == "__main__":

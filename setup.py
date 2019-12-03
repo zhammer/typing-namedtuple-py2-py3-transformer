@@ -4,13 +4,13 @@ with open("README.md", "r") as readme:
     long_description = readme.read()
 
 setup(
-    name="tornado-async-transformer",
-    version="0.1.6",
-    description="libcst transformer and codemod for updating tornado @gen.coroutine syntax to python3.5+ native async/await",
-    url="https://github.com/zhammer/tornado-async-transformer",
+    name="typing-namedtuple-transformer",
+    version="0.1.0",
+    description="libcst codemod for updating typing.NamedTuple py2 backport to native py3 syntax",
+    url="https://github.com/zhammer/typing-namedtuple-transformer",
     packages=find_packages(exclude=["tests", "demo_site"]),
-    package_data={"tornado_async_transformer": ["py.typed"]},
-    install_requires=["libcst >= 0.1.2"],
+    package_data={"typing_namedtuple_transformer": ["py.typed"]},
+    install_requires=["libcst >= 0.2.4"],
     author="Zach Hammer",
     author_email="zachary_hammer@alumni.brown.edu",
     license="MIT License",
