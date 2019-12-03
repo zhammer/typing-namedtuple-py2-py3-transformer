@@ -39,13 +39,21 @@ class TypingNamedTupleTransformer(cst.CSTTransformer):
     ) -> Optional[bool]:
         is_py2_typing_namedtuple = self.is_py2_typing_namedtuple(node)
         if is_py2_typing_namedtuple and self.in_namedtuple:
-            raise TransformError("Entering a py2 typing namedtuple while already in one.")
+            raise RuntimeError("Entering a py2 typing namedtuple while already in one.")
 
         self.simple_statement_line_stack.append(is_py2_typing_namedtuple)
 
         if is_py2_typing_namedtuple:
+            # ... = NamedTuple('NameByFirstArg', ...)
+            name_by_first_arg = node.body[0].value.args[0].value.value[1:-1]
+            # NameByAssignTarget = NamedTuple(...)
+            name_by_assign_target = node.body[0].targets[0].target.value
+
+            if not name_by_first_arg == name_by_assign_target:
+                raise TransformError(f"Assign target name {name_by_assign_target} does not equal specified name {name_by_first_arg}.")
+
             self.namedtuple_func = node.body[0].value.func
-            self.name = node.body[0].value.args[0].value.value[1:-1]
+            self.name = name_by_first_arg
 
         return True
 
