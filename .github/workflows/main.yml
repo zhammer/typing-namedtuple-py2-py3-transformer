@@ -20,8 +20,6 @@ jobs:
       run: pipenv run pytest -vv
     - name: Check black formatting
       run: pipenv run black --check .
-    - name: Mypy
-      run: pipenv run mypy typing_namedtuple_transformer
     - name: Deploy to pypi
       if: github.ref == 'refs/heads/master'
       env:

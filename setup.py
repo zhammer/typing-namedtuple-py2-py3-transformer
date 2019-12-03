@@ -5,7 +5,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name="typing-namedtuple-transformer",
-    version="0.1.6",
+    version="0.1.0",
     description="libcst codemod for updating typing.NamedTuple py2 backport to native py3 syntax",
     url="https://github.com/zhammer/typing-namedtuple-transformer",
     packages=find_packages(exclude=["tests", "demo_site"]),
