@@ -50,7 +50,9 @@ class TypingNamedTupleTransformer(cst.CSTTransformer):
             name_by_assign_target = node.body[0].targets[0].target.value
 
             if not name_by_first_arg == name_by_assign_target:
-                raise TransformError(f"Assign target name {name_by_assign_target} does not equal specified name {name_by_first_arg}.")
+                raise TransformError(
+                    f"Assign target name {name_by_assign_target} does not equal specified name {name_by_first_arg}."
+                )
 
             self.namedtuple_func = node.body[0].value.func
             self.name = name_by_first_arg
@@ -88,7 +90,7 @@ class TypingNamedTupleTransformer(cst.CSTTransformer):
             name=cst.Name(self.name),
             bases=[cst.Arg(self.namedtuple_func)],
             body=cst.IndentedBlock(body=class_annotations),
-            leading_lines=updated_node.leading_lines
+            leading_lines=updated_node.leading_lines,
         )
 
         # reset state
